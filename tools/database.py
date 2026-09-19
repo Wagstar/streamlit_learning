@@ -16,7 +16,7 @@ COLUMNS = {
     "task_name": "TEXT NOT NULL DEFAULT ''",
     "task_description": "TEXT",
     "due_date": "TEXT NOT NULL DEFAULT ''",
-    "status": "INTEGER NOT NULL DEFAULT 0",
+    "status": "TEXT NOT NULL DEFAULT 'Pending'",
     "priority": "INTEGER DEFAULT 0 CHECK (priority BETWEEN 0 AND 5)",
 }
 
@@ -49,3 +49,17 @@ def get_tasks():
     df = pd.read_sql_query("SELECT * FROM tasks", conn)
     conn.close()
     return df
+
+def update_task(task_id, column, value):
+    conn = get_connection()
+    conn.execute(f"UPDATE tasks SET {column} = ? WHERE id = ?", (value, task_id))
+    conn.commit()
+    conn.close()
+
+def delete_task(task_id):
+    conn = get_connection()
+    conn.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
+    conn.commit()
+    conn.close()
+
+
