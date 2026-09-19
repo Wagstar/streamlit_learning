@@ -5,3 +5,4 @@
 - [ ] Let the Notes page pick which note file to view, instead of always showing the hardcoded `TestNote.md`
 - [ ] Add a `requirements.txt` so `pip install streamlit pandas numpy` isn't duplicated by hand from the README
 - [ ] Add a Windows equivalent of `startup.sh`
+- [ ] Add a `Dockerfile` (and `docker-compose.yml` with a volume mount for `data/`) so the app can run in Docker
